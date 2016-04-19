@@ -1,5 +1,4 @@
 module RedmineWebhook
-module RedmineWebhook
   class TimeEntryWrapper
     def initialize(time_entry)
       @time_entry = time_entry

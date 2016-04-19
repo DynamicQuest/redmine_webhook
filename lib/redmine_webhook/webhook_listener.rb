@@ -22,7 +22,7 @@ module RedmineWebhook
     end
 
     def controller_timelog_edit_before_save(context = {})
-      context.inspect
+      logger.debug "Person attributes hash: #{@context.attributes.inspect}"
       time_entry = context[:time_entry]
       webhook = Webhook.first
       return unless webhook

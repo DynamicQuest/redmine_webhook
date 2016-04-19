@@ -13,7 +13,7 @@ module RedmineWebhook
         :updated_on => @time_entry.updated_on,
         :project => RedmineWebhook::ProjectWrapper.new(@time_entry.project).to_hash,
         :user => RedmineWebhook::AuthorWrapper.new(@time_entry.user).to_hash,
-        :issue => RedmineWebhok::IssueWrapper.new(@time_entry.issue).to_hash
+        :issue => RedmineWebhook::IssueWrapper.new(@time_entry.issue).to_hash
       }
     end
   end

@@ -5,7 +5,7 @@ module RedmineWebhook
       issue = context[:issue]
       controller = context[:controller]
       project = issue.project
-      webhook = Webhook.where(:project_id => project.project.id).first
+      webhook = Webhook.first
       return unless webhook
       post(webhook, issue_to_json(issue, controller))
     end
@@ -14,10 +14,19 @@ module RedmineWebhook
       journal = context[:journal]
       controller = context[:controller]
       issue = context[:issue]
+      time_entry = context[:time_entry]
       project = issue.project
-      webhook = Webhook.where(:project_id => project.project.id).first
+      webhook = Webhook.first
       return unless webhook
-      post(webhook, journal_to_json(issue, journal, controller))
+      post(webhook, journal_to_json(issue, journal, controller, time_entry))
+    end
+
+    def controller_timelog_edit_before_save(context = {})
+
+      time_entry = context[:time_entry]
+      webhook = Webhook.first
+      return unless webhook
+      post(webhook, journal_to_json(issue, journal, controller, time_entry))
     end
 
     private
@@ -31,12 +40,13 @@ module RedmineWebhook
       }.to_json
     end
 
-    def journal_to_json(issue, journal, controller)
+    def journal_to_json(issue, journal, controller, time_entry)
       {
         :payload => {
           :action => 'updated',
           :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
           :journal => RedmineWebhook::JournalWrapper.new(journal).to_hash,
+          :time_entry => RedmineWebhook::JournalWrapper.new(time_entry).to_hash,
           :url => controller.issue_url(issue)
         }
       }.to_json

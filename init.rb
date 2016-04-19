@@ -7,10 +7,10 @@ Rails.configuration.to_prepare do
 end
 
 Redmine::Plugin.register :redmine_webhook do
-  name 'Redmine Webhook plugin'
-  author 'suer'
-  description 'A Redmine plugin posts webhook on creating and updating tickets'
+  name 'Customized Redmine Webhook plugin'
+  author 'dray'
+  description 'A tweaked Redmine plugin posts webhook on creating and updating tickets and action items'
   version '0.0.1'
-  url 'https://github.com/suer/redmine_webhook'
-  author_url 'http://d.hatena.ne.jp/suer'
+  url 'https://github.com/DynamicQuest/redmine_webhook'
+  author_url 'http://redlettermarketing.com'
 end

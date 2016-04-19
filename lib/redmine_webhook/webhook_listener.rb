@@ -56,7 +56,7 @@ module RedmineWebhook
       {
         :payload => {
           :action => 'created',
-          :time_entry_id => time_entry.id,
+          :time_entry => RedmineWebhook::TimeEntryWrapper.new(time_entry).to_hash
         }
       }.to_json
     end
